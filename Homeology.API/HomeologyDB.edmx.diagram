@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="067b63d29c19407e88749c06d9759142" Name="Diagram1">
+        <EntityTypeShape EntityType="HomeologyModel.Agent" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Appointment" Width="1.5" PointX="13.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Attachment" Width="1.5" PointX="10.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Client" Width="1.5" PointX="8" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Deal" Width="1.5" PointX="11" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.DealByContact" Width="1.5" PointX="13.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.DealStatu" Width="1.5" PointX="8.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Error" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Feedback" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Log" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Message" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Role" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Task" Width="1.5" PointX="13.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.UserProfile" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.UserRole" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.Wishlist" Width="1.5" PointX="13.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeologyModel.WishlistItem" Width="1.5" PointX="15.5" PointY="19.5" IsExpanded="true" />
+        <AssociationConnector Association="HomeologyModel.FK_Client_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Deal_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Appointment_Deal" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Attachment_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_DealByContact_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Deal_DealStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_DealByContact_Deal" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Tasks_Deal" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Wishlist_Deal" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Error_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Feedback_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_Logs_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_UserProfile_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_UserRole_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeologyModel.FK_WishlistItems_Wishlist" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

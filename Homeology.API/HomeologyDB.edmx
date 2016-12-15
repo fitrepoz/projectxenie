@@ -1,0 +1,1162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HomeologyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="agent_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="agent_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="agent_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="agent_status" Type="nvarchar" MaxLength="100" />
+          <Property Name="agent_company" Type="nvarchar" MaxLength="250" />
+          <Property Name="agent_registration" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="appointment_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appointment_id" Type="int" Nullable="false" />
+          <Property Name="deal_id" Type="int" />
+          <Property Name="agent_id" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="agenda" Type="nvarchar(max)" />
+          <Property Name="location" Type="nvarchar" MaxLength="100" />
+          <Property Name="agent_rsvp" Type="bit" />
+          <Property Name="client_rsvp" Type="bit" />
+          <Property Name="start_time" Type="datetime" />
+          <Property Name="end_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="attachment_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="attachment_id" Type="int" Nullable="false" />
+          <Property Name="deal_id" Type="int" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="attachment" Type="image" />
+          <Property Name="caption" Type="nvarchar" MaxLength="250" />
+          <Property Name="date_posted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="agent_id" Type="int" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="client_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="client_phone" Type="nchar" MaxLength="25" />
+          <Property Name="client_notes" Type="nvarchar(max)" />
+          <Property Name="client_referrer" Type="nvarchar" MaxLength="50" />
+          <Property Name="client_registration" Type="datetime" />
+          <Property Name="IdentityCard" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="deal_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deal_id" Type="int" Nullable="false" />
+          <Property Name="agent_id" Type="int" />
+          <Property Name="deal_status_id" Type="int" />
+        </EntityType>
+        <EntityType Name="DealByContact">
+          <Key>
+            <PropertyRef Name="deal_by_contact_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deal_by_contact_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="deal_id" Type="int" />
+        </EntityType>
+        <EntityType Name="DealStatus">
+          <Key>
+            <PropertyRef Name="deal_status_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deal_status_id" Type="int" Nullable="false" />
+          <Property Name="deal_status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="stacktrace" Type="nvarchar(max)" />
+          <Property Name="date_created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="feedback_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="date_added" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="date_occurred" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="message_id" Type="int" Nullable="false" />
+          <Property Name="contact_id" Type="int" />
+          <Property Name="deal_id" Type="int" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="date_sent" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="task_id" Type="int" Nullable="false" />
+          <Property Name="deal_id" Type="int" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="due_date" Type="datetime" />
+          <Property Name="reminder_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="user_role_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="hashed_password" Type="nvarchar" MaxLength="200" />
+          <Property Name="salt" Type="nvarchar" MaxLength="200" />
+          <Property Name="is_locked" Type="bit" />
+          <Property Name="date_created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="wishlist_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wishlist_id" Type="int" Nullable="false" />
+          <Property Name="deal_id" Type="int" />
+          <Property Name="target_date" Type="datetime" />
+          <Property Name="target_price" Type="varchar" MaxLength="50" />
+          <Property Name="target_coord" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WishlistItems">
+          <Key>
+            <PropertyRef Name="wishlist_items_id" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wishlist_items_id" Type="int" Nullable="false" />
+          <Property Name="wishlist_id" Type="int" />
+          <Property Name="item" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Appointment_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachment_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deal_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deal_DealStatus">
+          <End Role="DealStatus" Type="Self.DealStatus" Multiplicity="0..1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealStatus">
+              <PropertyRef Name="deal_status_id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="deal_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealByContact_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="DealByContact" Type="Self.DealByContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="DealByContact">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealByContact_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="DealByContact" Type="Self.DealByContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="DealByContact">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Error" Type="Self.Error" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile1" Type="Self.UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserProfile1">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WishlistItems_Wishlist">
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="0..1" />
+          <End Role="WishlistItems" Type="Self.WishlistItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wishlist">
+              <PropertyRef Name="wishlist_id" />
+            </Principal>
+            <Dependent Role="WishlistItems">
+              <PropertyRef Name="wishlist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeologyModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deal" EntityType="Self.Deal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealByContact" EntityType="Self.DealByContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealStatus" EntityType="Self.DealStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WishlistItems" EntityType="Self.WishlistItems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Appointment_Deal" Association="Self.FK_Appointment_Deal">
+            <End Role="Deal" EntitySet="Deal" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachment_Client" Association="Self.FK_Attachment_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Attachment" EntitySet="Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Agent" Association="Self.FK_Client_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deal_Agent" Association="Self.FK_Deal_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deal_DealStatus" Association="Self.FK_Deal_DealStatus">
+            <End Role="DealStatus" EntitySet="DealStatus" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealByContact_Client" Association="Self.FK_DealByContact_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="DealByContact" EntitySet="DealByContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealByContact_Deal" Association="Self.FK_DealByContact_Deal">
+            <End Role="Deal" EntitySet="Deal" />
+            <End Role="DealByContact" EntitySet="DealByContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_UserProfile" Association="Self.FK_Error_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Error" EntitySet="Error" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_UserProfile" Association="Self.FK_Feedback_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_UserProfile" Association="Self.FK_Logs_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Deal" Association="Self.FK_Tasks_Deal">
+            <End Role="Deal" EntitySet="Deal" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_UserProfile" Association="Self.FK_UserProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserProfile1" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_UserProfile" Association="Self.FK_UserRole_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_Deal" Association="Self.FK_Wishlist_Deal">
+            <End Role="Deal" EntitySet="Deal" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishlistItems_Wishlist" Association="Self.FK_WishlistItems_Wishlist">
+            <End Role="Wishlist" EntitySet="Wishlist" />
+            <End Role="WishlistItems" EntitySet="WishlistItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeologyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="agent_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="agent_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="agent_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="agent_status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="agent_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="agent_registration" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Client_Agent" FromRole="Agent" ToRole="Client" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deal_Agent" FromRole="Agent" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="appointment_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appointment_id" Type="Int32" Nullable="false" />
+          <Property Name="deal_id" Type="Int32" />
+          <Property Name="agent_id" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="agenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="agent_rsvp" Type="Boolean" />
+          <Property Name="client_rsvp" Type="Boolean" />
+          <Property Name="start_time" Type="DateTime" Precision="3" />
+          <Property Name="end_time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK_Appointment_Deal" FromRole="Appointment" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="attachment_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="attachment_id" Type="Int32" Nullable="false" />
+          <Property Name="deal_id" Type="Int32" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="attachment1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="caption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="date_posted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Attachment_Client" FromRole="Attachment" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="agent_id" Type="Int32" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="client_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="client_phone" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="client_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="client_referrer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="client_registration" Type="DateTime" Precision="3" />
+          <Property Name="IdentityCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_Client_Agent" FromRole="Client" ToRole="Agent" />
+          <NavigationProperty Name="Attachments" Relationship="Self.FK_Attachment_Client" FromRole="Client" ToRole="Attachment" />
+          <NavigationProperty Name="DealByContacts" Relationship="Self.FK_DealByContact_Client" FromRole="Client" ToRole="DealByContact" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="deal_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deal_id" Type="Int32" Nullable="false" />
+          <Property Name="agent_id" Type="Int32" />
+          <Property Name="deal_status_id" Type="Int32" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_Deal_Agent" FromRole="Deal" ToRole="Agent" />
+          <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_Deal" FromRole="Deal" ToRole="Appointment" />
+          <NavigationProperty Name="DealStatu" Relationship="Self.FK_Deal_DealStatus" FromRole="Deal" ToRole="DealStatus" />
+          <NavigationProperty Name="DealByContacts" Relationship="Self.FK_DealByContact_Deal" FromRole="Deal" ToRole="DealByContact" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Deal" FromRole="Deal" ToRole="Tasks" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_Deal" FromRole="Deal" ToRole="Wishlist" />
+        </EntityType>
+        <EntityType Name="DealByContact">
+          <Key>
+            <PropertyRef Name="deal_by_contact_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deal_by_contact_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="deal_id" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_DealByContact_Client" FromRole="DealByContact" ToRole="Client" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK_DealByContact_Deal" FromRole="DealByContact" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="DealStatu">
+          <Key>
+            <PropertyRef Name="deal_status_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deal_status_id" Type="Int32" Nullable="false" />
+          <Property Name="deal_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deal_DealStatus" FromRole="DealStatus" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date_created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Error_UserProfile" FromRole="Error" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="feedback_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date_added" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Feedback_UserProfile" FromRole="Feedback" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date_occurred" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Logs_UserProfile" FromRole="Logs" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="message_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message_id" Type="Int32" Nullable="false" />
+          <Property Name="contact_id" Type="Int32" />
+          <Property Name="deal_id" Type="Int32" />
+          <Property Name="message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date_sent" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="task_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="task_id" Type="Int32" Nullable="false" />
+          <Property Name="deal_id" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="due_date" Type="DateTime" Precision="3" />
+          <Property Name="reminder_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK_Tasks_Deal" FromRole="Tasks" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="user_role_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hashed_password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="salt" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="is_locked" Type="Boolean" />
+          <Property Name="date_created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Error" Relationship="Self.FK_Error_UserProfile" FromRole="UserProfile" ToRole="Error" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_UserProfile" FromRole="UserProfile" ToRole="Feedback" />
+          <NavigationProperty Name="Log" Relationship="Self.FK_Logs_UserProfile" FromRole="UserProfile" ToRole="Logs" />
+          <NavigationProperty Name="UserProfile1" Relationship="Self.FK_UserProfile_UserProfile" FromRole="UserProfile" ToRole="UserProfile1" />
+          <NavigationProperty Name="UserProfile2" Relationship="Self.FK_UserProfile_UserProfile" FromRole="UserProfile1" ToRole="UserProfile" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_UserProfile" FromRole="UserProfile" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_UserRole_UserProfile" FromRole="UserRole" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="wishlist_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wishlist_id" Type="Int32" Nullable="false" />
+          <Property Name="deal_id" Type="Int32" />
+          <Property Name="target_date" Type="DateTime" Precision="3" />
+          <Property Name="target_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="target_coord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK_Wishlist_Deal" FromRole="Wishlist" ToRole="Deal" />
+          <NavigationProperty Name="WishlistItems" Relationship="Self.FK_WishlistItems_Wishlist" FromRole="Wishlist" ToRole="WishlistItems" />
+        </EntityType>
+        <EntityType Name="WishlistItem">
+          <Key>
+            <PropertyRef Name="wishlist_items_id" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wishlist_items_id" Type="Int32" Nullable="false" />
+          <Property Name="wishlist_id" Type="Int32" />
+          <Property Name="item" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Wishlist" Relationship="Self.FK_WishlistItems_Wishlist" FromRole="WishlistItems" ToRole="Wishlist" />
+        </EntityType>
+        <Association Name="FK_Client_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deal_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachment_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealByContact_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="DealByContact" Type="Self.DealByContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="DealByContact">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deal_DealStatus">
+          <End Role="DealStatus" Type="Self.DealStatu" Multiplicity="0..1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealStatus">
+              <PropertyRef Name="deal_status_id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="deal_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealByContact_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="DealByContact" Type="Self.DealByContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="DealByContact">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_Deal">
+          <End Role="Deal" Type="Self.Deal" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="deal_id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="deal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Error_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Error" Type="Self.Error" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Error">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Log" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile1" Type="Self.UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserProfile1">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WishlistItems_Wishlist">
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="0..1" />
+          <End Role="WishlistItems" Type="Self.WishlistItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wishlist">
+              <PropertyRef Name="wishlist_id" />
+            </Principal>
+            <Dependent Role="WishlistItems">
+              <PropertyRef Name="wishlist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeologyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Deals" EntityType="Self.Deal" />
+          <EntitySet Name="DealByContacts" EntityType="Self.DealByContact" />
+          <EntitySet Name="DealStatus" EntityType="Self.DealStatu" />
+          <EntitySet Name="Errors" EntityType="Self.Error" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
+          <EntitySet Name="WishlistItems" EntityType="Self.WishlistItem" />
+          <AssociationSet Name="FK_Client_Agent" Association="Self.FK_Client_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deal_Agent" Association="Self.FK_Deal_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Deal" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_Deal" Association="Self.FK_Appointment_Deal">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachment_Client" Association="Self.FK_Attachment_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealByContact_Client" Association="Self.FK_DealByContact_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="DealByContact" EntitySet="DealByContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deal_DealStatus" Association="Self.FK_Deal_DealStatus">
+            <End Role="DealStatus" EntitySet="DealStatus" />
+            <End Role="Deal" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealByContact_Deal" Association="Self.FK_DealByContact_Deal">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="DealByContact" EntitySet="DealByContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Deal" Association="Self.FK_Tasks_Deal">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_Deal" Association="Self.FK_Wishlist_Deal">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Error_UserProfile" Association="Self.FK_Error_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Error" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_UserProfile" Association="Self.FK_Feedback_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_UserProfile" Association="Self.FK_Logs_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_UserProfile" Association="Self.FK_UserProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserProfile1" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_UserProfile" Association="Self.FK_UserRole_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishlistItems_Wishlist" Association="Self.FK_WishlistItems_Wishlist">
+            <End Role="Wishlist" EntitySet="Wishlists" />
+            <End Role="WishlistItems" EntitySet="WishlistItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeologyModelStoreContainer" CdmEntityContainer="HomeologyEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="HomeologyModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="agent_email" ColumnName="agent_email" />
+                <ScalarProperty Name="agent_phone" ColumnName="agent_phone" />
+                <ScalarProperty Name="agent_status" ColumnName="agent_status" />
+                <ScalarProperty Name="agent_company" ColumnName="agent_company" />
+                <ScalarProperty Name="agent_registration" ColumnName="agent_registration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="HomeologyModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="appointment_id" ColumnName="appointment_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="agenda" ColumnName="agenda" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="agent_rsvp" ColumnName="agent_rsvp" />
+                <ScalarProperty Name="client_rsvp" ColumnName="client_rsvp" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="HomeologyModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="attachment1" ColumnName="attachment" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="date_posted" ColumnName="date_posted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="HomeologyModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="client_email" ColumnName="client_email" />
+                <ScalarProperty Name="client_phone" ColumnName="client_phone" />
+                <ScalarProperty Name="client_notes" ColumnName="client_notes" />
+                <ScalarProperty Name="client_referrer" ColumnName="client_referrer" />
+                <ScalarProperty Name="client_registration" ColumnName="client_registration" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="HomeologyModel.Deal">
+              <MappingFragment StoreEntitySet="Deal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="deal_status_id" ColumnName="deal_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealByContacts">
+            <EntityTypeMapping TypeName="HomeologyModel.DealByContact">
+              <MappingFragment StoreEntitySet="DealByContact">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="deal_by_contact_id" ColumnName="deal_by_contact_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealStatus">
+            <EntityTypeMapping TypeName="HomeologyModel.DealStatu">
+              <MappingFragment StoreEntitySet="DealStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="deal_status_id" ColumnName="deal_status_id" />
+                <ScalarProperty Name="deal_status" ColumnName="deal_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errors">
+            <EntityTypeMapping TypeName="HomeologyModel.Error">
+              <MappingFragment StoreEntitySet="Error">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="HomeologyModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="HomeologyModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date_occurred" ColumnName="date_occurred" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="HomeologyModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="message_id" ColumnName="message_id" />
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="message1" ColumnName="message" />
+                <ScalarProperty Name="date_sent" ColumnName="date_sent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="HomeologyModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="HomeologyModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="task_id" ColumnName="task_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="reminder_date" ColumnName="reminder_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="HomeologyModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_role_id" ColumnName="user_role_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="hashed_password" ColumnName="hashed_password" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="is_locked" ColumnName="is_locked" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="HomeologyModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlists">
+            <EntityTypeMapping TypeName="HomeologyModel.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlist">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="wishlist_id" ColumnName="wishlist_id" />
+                <ScalarProperty Name="deal_id" ColumnName="deal_id" />
+                <ScalarProperty Name="target_date" ColumnName="target_date" />
+                <ScalarProperty Name="target_price" ColumnName="target_price" />
+                <ScalarProperty Name="target_coord" ColumnName="target_coord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WishlistItems">
+            <EntityTypeMapping TypeName="HomeologyModel.WishlistItem">
+              <MappingFragment StoreEntitySet="WishlistItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="wishlist_items_id" ColumnName="wishlist_items_id" />
+                <ScalarProperty Name="wishlist_id" ColumnName="wishlist_id" />
+                <ScalarProperty Name="item" ColumnName="item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
